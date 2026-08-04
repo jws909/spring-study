@@ -1,4 +1,4 @@
-package com.app.controller.study.quiz.quiz01;
+package com.app.controller.study.quiz.quiz02;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
