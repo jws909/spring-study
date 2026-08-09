@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.app.dto.study.request.Product;
 import com.app.dto.study.request.ProductRequestForm;
 
 @Controller
