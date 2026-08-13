@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	h4 {
-		margin-bottom : 0;
-		padding : 0;
-	}
+h4 {
+	margin-bottom: 0;
+	padding: 0;
+}
 </style>
 </head>
 <body>
@@ -18,8 +18,8 @@
 	<form action="" method="post">
 		<label>건물/동 이름<input type="text" name="buildingName"></label><br>
 		<label>호실번호<input type="text" name="roomNumber"></label><br>
-		<label>층수<input type="text" name="floor"></label><br> 
-		<label>최대숙박인원<input type="text" name="maxGuestCount"></label><br>
+		<label>층수<input type="text" name="floor"></label><br> <label>최대숙박인원<input
+			type="text" name="maxGuestCount"></label><br>
 
 		<h4>뷰타입</h4>
 		<select name="viewType">
@@ -30,5 +30,9 @@
 		<button type="submit">객실추가</button>
 	</form>
 
+	<div>
+		<button type="button" onclick="location.href='/admin/rooms'">객실목록보기</button>
+	</div>
+	
 </body>
 </html>
