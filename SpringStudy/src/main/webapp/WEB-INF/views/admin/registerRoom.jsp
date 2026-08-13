@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 	h4 {
-		margin : 0;
+		margin-bottom : 0;
 		padding : 0;
 	}
 </style>
