@@ -52,6 +52,6 @@ public class RoomServiceImpl implements RoomService {
 		
 		int result = roomDAO.saveRoom(room);
 		
-		return 0;
+		return result;
 	}
 }

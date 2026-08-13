@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	h4 {
+		margin : 0;
+		padding : 0;
+	}
+</style>
 </head>
 <body>
 	<h1>관리자페이지 객실 추가</h1>
