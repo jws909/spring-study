@@ -97,11 +97,17 @@ public class AdminController {
 		int result = userService.saveCustomerUser(user);
 		
 		if(result > 0) {
-			
+			return "redirect:/admin/users";
 		} else {
-			
+			return "admin/addUser";
 		}
+	}
+	
+	@GetMapping("/admin/users")
+	public String users(Model model) {
+		List<User> userList = userService.findUserList();
+		model.addAttribute("userList", userList);
 		
-		return "admin/addUser";
+		return "admin/users";
 	}
 }
