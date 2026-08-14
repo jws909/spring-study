@@ -25,4 +25,12 @@
 		WHERE ID = #{id}
 	</select>
 	
+	<select id="checkUserLogin" resultType="User" parameterType="User">
+		SELECT *
+		FROM T_USER
+		WHERE ID = #{id}
+		AND PW = #{pw}
+		AND USER_TYPE = #{userType}
+	</select>
+	
 </mapper>
