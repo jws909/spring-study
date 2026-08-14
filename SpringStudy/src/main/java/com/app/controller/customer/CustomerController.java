@@ -2,7 +2,11 @@ package com.app.controller.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.app.dto.user.User;
 import com.app.service.user.UserService;
 
 @Controller
@@ -14,5 +18,21 @@ public class CustomerController {
 	UserService userService;
 	//사용자 계정정보 관련 서비스 로직
 	
+	@GetMapping("/customer/signup")
+	public String signup() {
+		return "customer/signup";
+	}
+	
+	@PostMapping("/customer/signup")
+	public String signupAction(@ModelAttribute User user) {
+		
+		int result = userService.saveCustomerUser(user);
+		
+		if(result > 0) {  //가입 성공 시 메인화면으로 이동
+			return "redirect:/main";
+		} else {  //가입 실패 시 회원가입화면으로 이동
+			return "redirect:/customer/signup";
+		}
+	}
 	
 }
