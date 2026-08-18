@@ -33,4 +33,18 @@
 		AND USER_TYPE = #{userType}
 	</select>
 	
+	<update id="modifyUser" parameterType="User">
+		UPDATE T_USER
+		SET
+			PW = #{pw},
+			NAME = #{name},
+			USER_TYPE = #{userType}
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="modifyPw" parameterType="User">
+		UPDATE T_USER
+		SET PW = #{pw}
+		WHERE ID = #{id}
+	</update>
 </mapper>
