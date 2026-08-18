@@ -47,4 +47,94 @@
 		SET PW = #{pw}
 		WHERE ID = #{id}
 	</update>
+	
+	<select id="findUserListBySearchCondition" parameterType="UserSearchCondition" resultType="User">
+		
+		SELECT *
+		FROM T_USER
+		<where>
+			<trim prefixOverrides="OR" prefix="(" suffix=")">
+				<if test="name != null and name != ''">
+					NAME LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="id != null and id != ''">
+					OR ID LIKE '%' || #{searchKeyword} || '%'
+				</if>
+			</trim>
+			<if test="userType != null and userType != ''">
+				AND USER_TYPE = #{userType}
+			</if>
+		</where>
+		
+		
+		<!-- SELECT *
+		FROM T_USER
+		<where>
+			<if test="(name != null and name != '') or (id != null and id != '')">
+				(
+					<if test="name != null and name != ''">
+						NAME LIKE '%' || #{searchKeyword} || '%'
+					</if>
+					<if test="id != null and id != ''">
+						<if test="name != null and name != ''">
+							OR ID LIKE '%' || #{searchKeyword} || '%'
+						</if>
+						<if test="name == null or name == ''">
+							ID LIKE '%' || #{searchKeyword} || '%'
+						</if>
+					</if>
+				)
+			</if>
+			<if test="userType != null and userType != ''">
+				AND USER_TYPE = #{userType}
+			</if>
+		</where> -->
+		
+		<!-- SELECT *
+		FROM T_USER
+		<where>
+			<if test="name != null and name != ''">
+				NAME LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="id != null and id != ''">
+				AND ID LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="userType != null and userType != ''">
+				AND USER_TYPE = #{userType}
+			</if>
+		</where> -->
+		
+		<!-- SELECT *
+		FROM T_USER
+		<where>
+			<if test="name != null and name != ''">
+				NAME LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="id != null and id != ''">
+				AND ID LIKE '%' || #{searchKeyword} || '%'
+			</if>
+		</where> -->
+		
+		<!-- SELECT *
+		FROM T_USER
+		WHERE
+			1=2
+		<if test="name != null and name != ''">
+			OR NAME LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="id != null and id != ''">
+			OR ID LIKE '%' || #{searchKeyword} || '%'
+		</if> -->
+		
+		<!-- SELECT *
+		FROM T_USER
+		WHERE
+			1=1
+		<if test="name != null and name != ''">
+			AND NAME LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="id != null and id != ''">
+			AND ID LIKE '%' || #{searchKeyword} || '%'
+		</if> -->
+	</select>
 </mapper>
