@@ -17,10 +17,10 @@
 			<label>아이디 <input type="checkbox" name="id" value="searchId" <c:if test="${userSearchCondition.id != null}">checked</c:if>></label>
 			<label>이름 <input type="checkbox" name="name" value="searchName" <c:if test="${userSearchCondition.name != null}">checked</c:if>></label>
 			
-			<a>
+			<p>
 				<label><input type="radio" name="userType" value="ADM" <c:if test="${userSearchCondition.userType == 'ADM'}">checked</c:if>>관리자</label>
 				<label><input type="radio" name="userType" value="CUS" <c:if test="${userSearchCondition.userType == 'CUS'}">checked</c:if>>사용자(고객)</label>
-			</a>
+			</p>
 			
 			<label>검색어 : <input type="text" name="searchKeyword" value="${userSearchCondition.searchKeyword}"></label>
 			<button type="submit">검색</button>
