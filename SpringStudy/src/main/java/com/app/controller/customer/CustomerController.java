@@ -1,5 +1,6 @@
 package com.app.controller.customer;
 
+import com.app.controller.accommondation.AccommodationController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.app.common.ApiCommonCode;
 import com.app.common.CommonCode;
+import com.app.dto.api.ApiResponse;
+import com.app.dto.api.ApiResponseHeader;
 import com.app.dto.user.User;
+import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
 
@@ -22,9 +27,14 @@ public class CustomerController {
 
 	//일반 고객 사용자가 접근하는 관련 서비스
 	
+	private final AccommodationController accommodationController;
 	@Autowired
 	UserService userService;
 	//사용자 계정정보 관련 서비스 로직
+
+	CustomerController(AccommodationController accommodationController) {
+		this.accommodationController = accommodationController;
+	}
 	
 	@GetMapping("/customer/signup")
 	public String signup() {
@@ -64,6 +74,46 @@ public class CustomerController {
 			return "N";
 		}
 
+	}
+	
+	@ResponseBody
+	@PostMapping("/customer/checkDupIdJson")
+	public ApiResponse<String> checkDupIdJson(@RequestBody UserDupCheck userDupCheck) {
+	
+		System.out.println(userDupCheck);
+		
+		boolean result = userService.isDuplicatedId(userDupCheck.getId());
+		System.out.println(result);
+	
+		// Y N
+		// api response 활용
+		// header body
+		// 		  Y N
+		
+		ApiResponse<String> apiResponse = new ApiResponse<>();
+		
+		//header
+		ApiResponseHeader header = new ApiResponseHeader();
+		header.setResultCode(ApiCommonCode.API_RESULT_SUCCESS);
+		header.setResultMessage(ApiCommonCode.API_RESULT_SUCCESS_MSG);
+		
+		apiResponse.setHeader(header);
+		
+		//body
+		String body = null;
+		if(result) {  //true면 중복
+			body = "Y";
+		} else {
+			body = "N";
+		}
+		
+		apiResponse.setBody(body);
+		
+		return apiResponse;
+//	public String checkDupIdJson(@RequestBody String data) {
+//		System.out.println(data);  //기본텍스트형태로 들어와서 추가적인 json파싱 작업이 필요함.
+		//{"id":"id","type":"CUS"}
+		// id	type 추출
 	}
 	
 	@GetMapping("/customer/signin")
