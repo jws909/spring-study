@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.common.CommonCode;
 import com.app.dto.user.User;
@@ -39,6 +41,29 @@ public class CustomerController {
 		} else {  //가입 실패 시 회원가입화면으로 이동
 			return "redirect:/customer/signup";
 		}
+	}
+	
+	//중복된 아이디 체크
+	@ResponseBody
+	@PostMapping("/customer/checkDupId")
+	public String checkDupId(@RequestBody String data) {
+				//요청 body 담겨져 오는 데이터를 단순 텍스트로 수신
+		
+		//클라이언트가 전달한 id 값을 받아서, 이게 중복인지 아닌지 DB에서 조회 비교 -> 응답
+		System.out.println("/customer/checkDupId");
+		System.out.println(data);
+		
+		boolean result = userService.isDuplicatedId(data);
+		System.out.println(result);
+		
+		// 중복 Y  중복아니면 N
+		
+		if(result) {  //true면 중복
+			return "Y";
+		} else {
+			return "N";
+		}
+
 	}
 	
 	@GetMapping("/customer/signin")
