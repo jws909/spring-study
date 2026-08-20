@@ -10,6 +10,8 @@ import com.app.dao.room.RoomDAO;
 import com.app.dto.room.Room;
 import com.app.dto.room.RoomSearchCondition;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 // 데이터소스와 연결/통신하는 역할
 // DB연동 -> DAO
@@ -17,6 +19,7 @@ import com.app.dto.room.RoomSearchCondition;
 
 //DAO Repository
 @Repository
+@Slf4j
 public class RoomDAOImpl implements RoomDAO {
 	
 	//DB연동 처리할때 필요한 관련된 객체(Bean) 주입
@@ -40,16 +43,32 @@ public class RoomDAOImpl implements RoomDAO {
 
 		//DB에 room정보 테이블에 room 정보를 저장
 								//실행할 쿼리 위치의 식별자, 매개변수
-		int result = sqlSessionTemplate.insert("room_mapper.saveRoom", room);
-		//수행 적용된 행의 수
+		
+		int result = 0;
+		
+		try {
+			result = sqlSessionTemplate.insert("room_mapper.saveRoom", room);
+			//수행 적용된 행의 수
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+			log.error(e.getMessage());
+		}
+		
 		
 		return result;
 	}
 
 	@Override
 	public Room findRoomByRoomId(int roomId) {
-
-		Room room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId", roomId);
+		
+		Room room = null;
+		
+		try {
+			room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId", roomId);
+		} catch(Exception e) {
+			log.error(e.getMessage());
+		}
+		
 		
 		return room;
 	}

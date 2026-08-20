@@ -1,7 +1,5 @@
 package com.app.controller.customer;
 
-import com.app.controller.accommondation.AccommodationController;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +20,25 @@ import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class CustomerController {
 
 	//일반 고객 사용자가 접근하는 관련 서비스
 	
-	private final AccommodationController accommodationController;
 	@Autowired
 	UserService userService;
 	//사용자 계정정보 관련 서비스 로직
 
-	CustomerController(AccommodationController accommodationController) {
-		this.accommodationController = accommodationController;
-	}
+//	private static final Logger log = LogManager.getLogger(CustomerController.class);
 	
 	@GetMapping("/customer/signup")
 	public String signup() {
+		
+		log.info("/customer/signup 경로 접근 확인");
+		
 		return "customer/signup";
 	}
 	
@@ -63,6 +64,8 @@ public class CustomerController {
 		System.out.println("/customer/checkDupId");
 		System.out.println(data);
 		
+		log.info("/customer/checkDupId 아이디 중복체크 요청 값 {}", data);
+		
 		boolean result = userService.isDuplicatedId(data);
 		System.out.println(result);
 		
@@ -81,6 +84,8 @@ public class CustomerController {
 	public ApiResponse<String> checkDupIdJson(@RequestBody UserDupCheck userDupCheck) {
 	
 		System.out.println(userDupCheck);
+		
+		log.info("/customer/checkDupIdJson 아이디 중복체크 요청 값 {}", userDupCheck);
 		
 		boolean result = userService.isDuplicatedId(userDupCheck.getId());
 		System.out.println(result);
