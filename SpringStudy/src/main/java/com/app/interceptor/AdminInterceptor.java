@@ -46,7 +46,7 @@ public class AdminInterceptor implements HandlerInterceptor {
 			
 		} else {  //로그인 X 상태
 			//잘못된 접속
-			response.sendRedirect("/main");	//잘못된 접근을 나타내는 처리 경로가 있다고 가정
+			response.sendRedirect("/error/badAccess");	//잘못된 접근을 나타내는 처리 경로가 있다고 가정
 			return false;
 		}
 		
