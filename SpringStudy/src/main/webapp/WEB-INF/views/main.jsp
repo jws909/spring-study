@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	/*css 코드 */
+	/* h1 { color:red;	} */
+</style>
+	
+<!-- 	<link href="./main.css" rel="stylesheet"/> -->
+<!-- 	<link href="../../resources/main.css" rel="stylesheet"/> -->
+<link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
 	<h1>main</h1>
@@ -24,5 +32,17 @@
 			<button onclick="location.href='/customer/signout'">로그아웃</button>
 		</c:if>
 	</div>
+	
+	<div>
+		<img src="/images/ocean.jpg">
+	</div>
+	<div>
+		<img src="https://images.pexels.com/photos/20672113/pexels-photo-20672113.jpeg">
+	</div>
+	
+	<script src="/js/main.js"></script>
+	<script>
+		//javascript
+	</script>
 </body>
 </html>
